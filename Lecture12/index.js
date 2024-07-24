@@ -3,9 +3,14 @@ let users = [];
 const handleDelete = (index) => {
   users.splice(index, 1);
   uiMaker();
-  
+
 };
 
+
+const deleteAll = () => {
+  users = [];
+  document.getElementById("tbody").innerHTML = "";
+}
 const uiMaker = () => {
   document.getElementById("tbody").innerHTML = "";
   for (let i = 0; i < users.length; i++) {
@@ -34,6 +39,7 @@ const uiMaker = () => {
     td5.addEventListener("click", () => handleDelete(i));
     tr.append(td1, td2, td3, td4, td6, td5);
     document.getElementById("tbody").append(tr);
+    debugger
   }
 };
 
@@ -44,15 +50,20 @@ const handleData = (e) => {
   let email = document.getElementById("email").value;
   let number = document.getElementById("number").value;
   let salary = document.getElementById("salary").value;
+
   let user = {
     username: username,
     email: email,
     number: number,
     salary: salary,
   };
+
+
   users.push(user);
   console.log(users);
   uiMaker();
+
 };
 
 document.getElementById("userData").addEventListener("submit", handleData);
+
