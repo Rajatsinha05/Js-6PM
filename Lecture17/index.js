@@ -1,12 +1,24 @@
 class Account {
+    #balance
+    #name
+    #accNumber
     constructor(name, accNumber) {
-        this.name = name
+        this.#name = name
         this.accNumber = accNumber
-        this.balance = 0
+        this.#balance = 0
+    }
+
+    getName() {
+        return this.#name
+
+    }
+    setName(name) {
+        this.#name = name
+
     }
 
     deposit(amount) {
-        this.balance += amount
+        this.#balance += amount
     }
     withdraw(amount) {
         if (this.balance >= amount) {
@@ -19,11 +31,9 @@ class Account {
     }
 
     checkBalance() {
-        return this.balance
+        return this.#balance
     }
 }
-
-
 class SalaryAccount extends Account {
     constructor(name, accNumber) {
         super(name, accNumber)
@@ -52,11 +62,20 @@ class SalaryAccount extends Account {
     checkCreditCardBalance() {
         return this.creditCard
     }
+
+    deposit() {
+        console.log("deposit amount  to salary account ",);
+
+    }
+
+
 }
 
 let acc = new Account("yug", 546547687)
 let salary = new SalaryAccount("dhruv", 5686787)
+console.log(salary.checkBalance());
+salary.deposit()
+console.log(salary.checkBalance());
 
-salary.deposit(5000)
-salary.creditCardDeposit(100000)
-console.log(salary.checkCreditCardBalance());
+
+

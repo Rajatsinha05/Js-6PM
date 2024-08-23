@@ -1,0 +1,10 @@
+#productsList {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+ 
+}
+
+#productsList div img {
+  width: 200px;
+  height: 200px;
+}

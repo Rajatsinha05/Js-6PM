@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Share Button with Popup</title>
+<style>
+    
+</style>
+  </head>
+  <body>
+    <button id="shareButton">Share</button>
+    <div id="popup" class="hidden">
+      <div class="popup-content">
+        <span id="closeButton">&times;</span>
+        <h2>Share this page</h2>
+        <ul>
+          <li><a id="facebookShare" href="#" target="_blank">Facebook</a></li>
+          <li><a id="twitterShare" href="#" target="_blank">Twitter</a></li>
+          <li><a id="emailShare" href="#">Email</a></li>
+        </ul>
+      </div>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const shareButton = document.getElementById("shareButton");
+        const popup = document.getElementById("popup");
+        const closeButton = document.getElementById("closeButton");
+
+        const shareUrl = "https://example.com"; // URL to share
+        const shareTitle = "Check out this page!";
+        const shareText = "Here is a great page you might like.";
+
+        // Show the popup
+        shareButton.addEventListener("click", () => {
+          // Check if the Share API is supported
+          if (navigator.share) {
+            // Use the Share API
+            navigator
+              .share({
+                title: shareTitle,
+                text: shareText,
+                url: shareUrl,
+              })
+              .then(() => {
+                console.log("Thanks for sharing!");
+              })
+              .catch((error) => {
+                console.error("Error sharing:", error);
+              });
+          } else {
+            // Fallback to popup
+            document.getElementById(
+              "facebookShare"
+            ).href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+              shareUrl
+            )}`;
+            document.getElementById(
+              "twitterShare"
+            ).href = `https://twitter.com/intent/tweet?url=${encodeURIComponent(
+              shareUrl
+            )}&text=${encodeURIComponent(shareText)}`;
+            document.getElementById(
+              "emailShare"
+            ).href = `mailto:?subject=${encodeURIComponent(
+              shareTitle
+            )}&body=${encodeURIComponent(shareUrl)}`;
+
+            popup.classList.remove("hidden");
+          }
+        });
+
+        // Hide the popup
+        closeButton.addEventListener("click", () => {
+          popup.classList.add("hidden");
+        });
+
+        // Hide the popup when clicking outside of the popup content
+        window.addEventListener("click", (event) => {
+          if (event.target === popup) {
+            popup.classList.add("hidden");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
