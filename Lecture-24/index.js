@@ -27,7 +27,7 @@ const mapper = (products) => {
         let category = document.createElement("p");
         category.innerHTML = ele.category;
         let btnDlt = document.createElement("button");
-        btnDlt.innerHTML = "Delete"
+        btnDlt.innerHTML = "<a h"
         btnDlt.addEventListener("click", () => handleDelete(index))
         let div = document.createElement("div");
         div.append(img, title, price, category, btnDlt);
