@@ -4,7 +4,8 @@ const Navbar = () => {
   let username = localStorage.getItem('username') 
 
   return `
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+       
+ <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
           <a class="navbar-brand" href="/index.html">Navbar</a>
           <button
@@ -60,7 +61,6 @@ const Navbar = () => {
           </div>
         </div>
       </nav>
-
     `
 }
 
