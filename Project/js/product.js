@@ -9,32 +9,42 @@ let products = JSON.parse(localStorage.getItem("products")) || [];
 
 // cart
 
-let cart = []
+let cart = JSON.parse(localStorage.getItem("cart")) || []
 
 const isExist = (id) => {
-    const product = cart.filter((ele) => ele.id == id)
-    if (product.length > 0) {
-        alert("Product already exists");
-        return true;
+    // const product = cart.filter((ele) => ele.id == id)
+    // if (product.length > 0) {
+    //     alert("Product already exists");
+    //     return true;
+    // }
+    // else {
+    //     return false;
+    // }
 
-    }
-    else {
-        return false;
-    }
+    let flag = false;
+    cart.map((ele, i) => {
 
+        if (ele.id == id) {
+            cart[i].qty = cart[i].qty + 1
+            flag = true;
+            alert("qty added")
+        }
+    })
+    return flag;
 }
 
 
 
 const handleCart = (ele) => {
-   if(isExist(ele.id)){
+    if (!isExist(ele.id)) {
 
-   }
-   else{
-    cart.push(ele);
-    alert("added cart")
-   }
-console.log(cart);
+        cart.push({ ...ele, qty: 1 });
+        alert("added to cart");
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    console.log(cart);
 
 }
 
