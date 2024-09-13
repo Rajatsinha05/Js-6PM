@@ -113,3 +113,12 @@ const search = (e) => {
 };
 
 document.getElementById("searching").addEventListener("submit", search);
+
+
+document.getElementById("search").addEventListener("keypress", (e) => {
+if(e.key=="Enter"){
+    
+}
+
+
+});
