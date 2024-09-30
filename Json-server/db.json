@@ -1,0 +1,16 @@
+{
+  "students": [
+    {
+      "id": "642c",
+      "name": "js",
+      "number": "7777996541",
+      "course": "full stack"
+    },
+    {
+      "id": "ef48",
+      "name": "",
+      "number": "",
+      "course": "full stack"
+    }
+  ]
+}
