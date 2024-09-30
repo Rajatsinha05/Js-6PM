@@ -1,5 +1,6 @@
 import studentApi from "./api.js";
 
+let id = -1
 const handleSubmit = (e) => {
     e.preventDefault();
     let student = {
@@ -8,12 +9,25 @@ const handleSubmit = (e) => {
         course: document.getElementById('course').value
     }
     console.log(student);
-    studentApi.post(student)
+    if (id == -1) {
+        studentApi.post(student)
+    }
+    else {
+        studentApi.patch(id, student)
+    }
+
+    window.location.reload()
 
 }
 document.getElementById("form").addEventListener("submit", handleSubmit)
 
-
+const handleUpdate = (ele) => {
+    document.getElementById('name').value = ele.name;
+    document.getElementById('number').value = ele.number;
+    document.getElementById('course').value = ele.course;
+    document.getElementById('type').value = "update"
+    id = ele.id;
+}
 // ui 
 const uiMaker = (students) => {
     students.map((ele) => {
@@ -26,8 +40,14 @@ const uiMaker = (students) => {
         number.innerHTML = ele.number
         let btn1 = document.createElement("button");
         btn1.innerHTML = "Delete"
-        btn1.addEventListener("click", () => studentApi.delete(ele.id))
-        div.append(name, course, number, btn1)
+        let btn2 = document.createElement("button");
+        btn2.innerHTML = "Update"
+        btn2.addEventListener("click", () => handleUpdate(ele))
+        btn1.addEventListener("click", () => {
+            studentApi.delete(ele.id)
+            window.location.reload()
+        })
+        div.append(name, course, number, btn1, btn2)
         document.getElementById("list").append(div)
     })
 
